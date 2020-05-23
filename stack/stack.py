@@ -16,14 +16,14 @@ return elements in Last In First Out order.
 class Stack:
     def __init__(self):
         self.size = 0
-        self.storage = DoublyLinkedList()
+        self.storage = []
 
     def __len__(self):
         return self.size
 
     def push(self, value):
         self.size = self.size + 1
-        self.storage.add_to_head(value)
+        self.storage.append(value)
 
     def pop(self):
         # Error Handling Check to see if there is no length
@@ -34,4 +34,28 @@ class Stack:
             # Remove 1 from the size
             self.size -= 1
             # Return the value removed from the head
-            return self.storage.remove_from_head()
+            return self.storage.pop()
+
+
+# class Stack:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = DoublyLinkedList()
+
+#     def __len__(self):
+#         return self.size
+
+#     def push(self, value):
+#         self.size = self.size + 1
+#         self.storage.add_to_head(value)
+
+#     def pop(self):
+#         # Error Handling Check to see if there is no length
+#         if self.size is 0:
+#             return None
+#         # If there is length to the Stack
+#         else:
+#             # Remove 1 from the size
+#             self.size -= 1
+#             # Return the value removed from the head
+#             return self.storage.remove_from_head()
