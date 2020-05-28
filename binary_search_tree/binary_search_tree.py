@@ -27,7 +27,7 @@ class BSTNode:
                     self.right = new_node
                 else:
                     self.right.insert(value)
-            elif value < self.value:
+            else:
                 if self.left is None:
                     self.left = new_node
                 else:
@@ -39,9 +39,23 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        
-        return True
-
+        # check to see if the BST is empty
+        if self.value:
+            # check to see if the target == the self.value
+            if target == self.value:
+                return True
+            # check to see if target is larger or smaller then the self.value
+            if target > self.value:
+                if not self.right:
+                    return False
+                return self.right.contains(target)
+            else:
+                if not self.left:
+                    return False
+                return self.left.contains(target)                    
+        # if there is no value then just return False
+        else:
+            return False
     # Return the maximum value found in the tree
     def get_max(self):
         pass
