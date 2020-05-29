@@ -58,11 +58,24 @@ class BSTNode:
             return False
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        current_node = self
+        while current_node.right is not None:
+            
+            current_node = current_node.right
+
+        return current_node.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+
+        if self.left:
+            self.left.for_each(fn)
+
+        if self.right:
+            self.right.for_each(fn)
+
+        fn(self.value)
 
     # Part 2 -----------------------
 
@@ -76,10 +89,25 @@ class BSTNode:
     def bft_print(self, node):
         pass
 
+    # make a queue
+
+    # enqueue the node
+
+    # as long as the queue is not empty, dequeue from the front, this is our current node
+    ## enqueue the children for the current node on the queue.
+
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
         pass
+
+    # make a stack
+
+    #push the node onto the stack
+
+    #as long as the stack is not empty
+    ## pop off the stack, this is our current node
+    ## put the children of the current node on the stack
 
     # Stretch Goals -------------------------
     # Note: Research may be required
