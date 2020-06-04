@@ -44,45 +44,137 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def find_middle(self):
+        # instantiate 2 variables 1 to loop further ahead then the other
+        slow = self.head 
+        fast = self.head 
+        # if the head is not None
+        if self.head is not None: 
+            # while the fast variable is not None and the next node is not None
+            while fast is not None and fast.next is not None: 
+                # fast will move 2 spots
+                fast = fast.next.next
+                # slow will move 1 spot
+                slow = slow.next
+                # once self.head becomes None the node that slow has become, its
+                # value will be printed 
+            print("The middle element is: ", slow.value)
+
+    def reverse_list(self):
+        pass
+
+    def iterate_nodes(self):
+        total = 0
+        pass
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
-
+        new_node = ListNode(value)
+        self.length += 1
+        if self.head:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        else:
+            self.head = new_node
+            self.tail = new_node 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        pass
+        value = self.head.value
+        self.delete(self.head)
+
+        return value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        new_node = ListNode(value)
+        self.length += 1
 
+        if self.tail:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+
+            self.tail = new_node
+        else:
+            self.tail = new_node
+            self.head = new_node
+
+            # self.tail, self.head = [new_node, new_node]
+            # self.tail = self.head = new_node
+            
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        value = self.tail.value
+        self.delete(self.tail)
+
+        return value
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        value = node.value
+        self.delete(node)
+        self.add_to_head(value)
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
-        pass
+        value = node.value
+        self.delete(node)
+        self.add_to_tail(value)
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
+
     def delete(self, node):
-        pass
-        
+    
+        if not self.head:
+            print("nothing to find here")
+            return
+
+        self.length -= 1
+
+        if self.head == self.tail:
+            self.head = self.tail = None
+
+        if node == self.head:
+            self.head = node.next
+
+        if node == self.tail:
+            self.tail = node.prev
+            self.tail.next = None
+
+        else:
+            node.delete()
+
     """Returns the highest value currently in the list"""
     def get_max(self):
-        pass
+        # check to see if there is a head
+        if not self.head:
+            return None
+        # instantiate 2 values for max and current
+        max = self.head.value
+        curr = self.head
+        # while curr doesn't equal None, check curr against max
+        # if curr is larger then max, it is assigned to ma
+        while curr:
+            if curr.value > max:
+                max = curr.value
+            curr = curr.next
+        return max
+
+# list1 = DoublyLinkedList() 
+# list1.add_to_head(5) 
+# list1.add_to_head(4) 
+# list1.add_to_head(2) 
+# list1.add_to_head(3) 
+# list1.add_to_head(1) 
+# list1.find_middle() 
